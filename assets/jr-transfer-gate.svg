@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="JR transfer gate guide image">
+  <rect width="640" height="480" fill="#eef3f7"/>
+  <rect y="344" width="640" height="136" fill="#d7dbe2"/>
+  <rect x="70" y="78" width="500" height="82" rx="10" fill="#1d2433"/>
+  <text x="320" y="132" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#fff">JR transfer gate</text>
+  <rect x="104" y="218" width="88" height="154" rx="8" fill="#1e9bd7"/>
+  <rect x="276" y="218" width="88" height="154" rx="8" fill="#1e9bd7"/>
+  <rect x="448" y="218" width="88" height="154" rx="8" fill="#1e9bd7"/>
+  <rect x="88" y="192" width="464" height="34" fill="#424b59"/>
+  <path d="M196 294h188" stroke="#d5142f" stroke-width="24" stroke-linecap="round"/>
+  <path d="M362 246l86 48-86 48z" fill="#d5142f"/>
+  <rect x="38" y="28" width="92" height="58" rx="10" fill="#1e9bd7"/>
+  <text x="84" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#fff">JR</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Suidobashi A2 exit to ASOBono">
+  <rect width="640" height="480" fill="#eef6ff"/>
+  <rect y="342" width="640" height="138" fill="#d7dbe2"/>
+  <rect x="72" y="72" width="496" height="112" rx="14" fill="#1d2433"/>
+  <text x="320" y="144" text-anchor="middle" font-family="Arial, sans-serif" font-size="58" font-weight="700" fill="#fff">A2 EXIT</text>
+  <path d="M204 292h200" stroke="#d5142f" stroke-width="28" stroke-linecap="round"/>
+  <path d="M382 238l98 54-98 54z" fill="#d5142f"/>
+  <rect x="92" y="224" width="114" height="126" rx="10" fill="#1e5aa8"/>
+  <text x="320" y="416" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#1d2433">After A2, go right</text>
+</svg>

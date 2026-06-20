@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Oimachi exit guide image">
+  <rect width="640" height="480" fill="#f7f8fb"/>
+  <rect y="346" width="640" height="134" fill="#d7dbe2"/>
+  <rect x="82" y="82" width="476" height="92" rx="12" fill="#1d2433"/>
+  <text x="320" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#fff">Exit</text>
+  <rect x="118" y="230" width="90" height="126" rx="8" fill="#1e9bd7"/>
+  <rect x="275" y="230" width="90" height="126" rx="8" fill="#1e9bd7"/>
+  <rect x="432" y="230" width="90" height="126" rx="8" fill="#1e9bd7"/>
+  <path d="M216 292h174" stroke="#248b63" stroke-width="24" stroke-linecap="round"/>
+  <path d="M370 244l86 48-86 48z" fill="#248b63"/>
+  <text x="320" y="422" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1d2433">Go with an adult</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Sobu line platform 5 to Suidobashi guide image">
+  <rect width="640" height="480" fill="#fffaf0"/>
+  <rect y="318" width="640" height="162" fill="#d7dbe2"/>
+  <rect x="48" y="52" width="544" height="126" rx="12" fill="#f0b429"/>
+  <text x="116" y="136" text-anchor="middle" font-family="Arial, sans-serif" font-size="82" font-weight="700" fill="#1d2433">5</text>
+  <rect x="176" y="76" width="2" height="78" fill="#1d2433"/>
+  <text x="392" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1d2433">Ochanomizu / Shinjuku</text>
+  <text x="392" y="144" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1d2433">Suidobashi direction</text>
+  <path d="M218 260h206" stroke="#d5142f" stroke-width="24" stroke-linecap="round"/>
+  <path d="M402 212l90 48-90 48z" fill="#d5142f"/>
+  <text x="320" y="404" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#1d2433">Get off at Suidobashi</text>
+</svg>

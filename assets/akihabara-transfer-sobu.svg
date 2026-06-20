@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Akihabara transfer to Sobu platform 5 guide image">
+  <rect width="640" height="480" fill="#f7f8fb"/>
+  <rect y="348" width="640" height="132" fill="#d7dbe2"/>
+  <rect x="60" y="62" width="520" height="80" rx="10" fill="#f0b429"/>
+  <text x="320" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#1d2433">Sobu Line platform 5</text>
+  <path d="M188 352h250v-38H226v-38h174v-38H264v-38h104v-38" fill="none" stroke="#596273" stroke-width="28" stroke-linejoin="round"/>
+  <path d="M330 264V156" stroke="#d5142f" stroke-width="26" stroke-linecap="round"/>
+  <path d="M284 184l46-58 46 58z" fill="#d5142f"/>
+  <rect x="46" y="26" width="108" height="58" rx="10" fill="#1d2433"/>
+  <text x="100" y="66" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#fff">5</text>
+</svg>

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>雨の日ルート 青物横丁からアソボーノ</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2433;
+      --muted: #5b6577;
+      --paper: #fffdf7;
+      --line: #d9dee8;
+      --keikyu: #d5142f;
+      --asakusa: #e85298;
+      --mita: #1e5aa8;
+      --ok: #248b63;
+      --warn: #f0b429;
+      --soft: #f4f8fc;
+      --card: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, system-ui, sans-serif;
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    header {
+      display: grid;
+      gap: 18px;
+      padding: 20px 0 22px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .code {
+      display: inline-grid;
+      place-items: center;
+      min-width: 72px;
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.15rem;
+      letter-spacing: 0;
+    }
+
+    .kk { background: var(--keikyu); }
+    .a { background: var(--asakusa); }
+    .i { background: var(--mita); }
+    .goal { background: var(--ok); }
+
+    .cards {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+      gap: 18px;
+      padding: 16px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      break-inside: avoid;
+    }
+
+    .scene {
+      position: relative;
+      display: grid;
+      align-content: end;
+      aspect-ratio: 4 / 3;
+      min-height: 220px;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: #eef3f7;
+    }
+
+    .scene-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #eef3f7;
+    }
+
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0) 55%, rgba(0,0,0,.5));
+      pointer-events: none;
+    }
+
+    .mark {
+      position: absolute;
+      z-index: 2;
+      display: inline-grid;
+      place-items: center;
+      min-height: 42px;
+      padding: 7px 12px;
+      border: 3px solid #fff;
+      border-radius: 8px;
+      background: var(--keikyu);
+      color: #fff;
+      font-size: 1.08rem;
+      font-weight: 900;
+      line-height: 1;
+      box-shadow: 0 8px 20px rgba(0,0,0,.28);
+    }
+
+    .mark.mita { background: var(--mita); }
+    .mark.asakusa { background: var(--asakusa); }
+    .mark.ok { background: var(--ok); }
+    .mark.top-left { top: 12px; left: 12px; }
+    .mark.top-right { top: 12px; right: 12px; }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .num {
+      display: inline-grid;
+      place-items: center;
+      min-width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+
+    .target {
+      display: inline-grid;
+      place-items: center;
+      min-height: 46px;
+      padding: 4px 14px;
+      border: 3px solid currentColor;
+      border-radius: 8px;
+      color: var(--ok);
+      font-size: clamp(1.35rem, 5vw, 2.35rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .target.red { color: var(--keikyu); }
+    .target.pink { color: var(--asakusa); }
+    .target.blue { color: var(--mita); }
+
+    h2 {
+      margin: 10px 0 8px;
+      font-size: clamp(1.45rem, 4vw, 2.35rem);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .kid {
+      margin: 0;
+      font-size: clamp(1.35rem, 4.2vw, 2.25rem);
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .direction-sign {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border: 3px solid var(--mita);
+      border-radius: 8px;
+      background: #eef5ff;
+      color: #143f79;
+      font-weight: 900;
+    }
+
+    .direction-sign strong {
+      font-size: clamp(1.1rem, 4vw, 1.9rem);
+      line-height: 1.15;
+    }
+
+    .danger {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border: 3px solid #d73a31;
+      border-radius: 8px;
+      background: #fff1ef;
+      color: #842018;
+      font-weight: 900;
+    }
+
+    .check {
+      margin-top: 10px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        width: min(100% - 20px, 720px);
+        padding-top: 14px;
+      }
+
+      .card {
+        grid-template-columns: 1fr;
+      }
+
+      .scene {
+        width: 100%;
+        min-height: 0;
+        aspect-ratio: 4 / 3;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>あめのひ ちかてつルート</h1>
+    </header>
+
+    <section class="cards" aria-label="ルートカード">
+      <article class="card">
+        <div class="scene">
+          <img class="scene-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Aomono-Yokocho_Station_2022_May_25_various.jpeg/500px-Aomono-Yokocho_Station_2022_May_25_various.jpeg" alt="青物横丁駅の入口">
+          <span class="mark top-left">入口</span>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">1</span>
+            <span class="target red">2</span>
+          </div>
+          <h2>2ばんせんへ</h2>
+          <p class="kid">あおものよこちょうで、2 の ホームへ いきます。</p>
+          <div class="check">さがすもの: 2番線 / 泉岳寺・都営浅草線方面</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene">
+          <img class="scene-photo" src="assets/rain-keikyu-platform.png" alt="雨の日の赤い電車のホーム">
+          <span class="mark top-left">京急</span>
+          <span class="mark top-right">三田へ</span>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">2</span>
+            <span class="target pink">三田</span>
+          </div>
+          <h2>みたで おりる</h2>
+          <p class="kid">でんしゃに のって、みた で おります。</p>
+          <div class="check">さがすもの: 三田 / みた</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene">
+          <img class="scene-photo" src="assets/rain-mita-transfer.png" alt="地下駅で三田線へ乗り換える通路">
+          <span class="mark asakusa top-left">浅草線</span>
+          <span class="mark mita top-right">三田線</span>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">3</span>
+            <span class="target blue">I</span>
+          </div>
+          <h2>あおい I を さがす</h2>
+          <p class="kid">みたで おりたら、あおい I の かんばんを さがします。</p>
+          <div class="check">さがすもの: 都営三田線 / I / 水道橋方面</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene">
+          <img class="scene-photo" src="assets/rain-mita-platform.png" alt="三田線の青いホーム">
+          <span class="mark mita top-left">4番線</span>
+          <span class="mark mita top-right">水道橋へ</span>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">4</span>
+            <span class="target blue">4番線</span>
+          </div>
+          <h2>4ばんせんに のる</h2>
+          <p class="kid">4 の ホームで、水道橋へ いく でんしゃに のります。</p>
+          <div class="direction-sign">
+            <span>のる ほう</span>
+            <strong>水道橋・大手町・西高島平方面</strong>
+          </div>
+          <div class="danger">目黒・日吉方面には のりません。</div>
+          <div class="check">さがすもの: 4番線 / 水道橋方面</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene">
+          <img class="scene-photo" src="https://image.faspa.epark.jp/shop_data/faspa-epark/v2/manual-images/mamakoe-images/1398_ifg_1398_97_1.jpg" alt="水道橋駅A2出口">
+          <span class="mark mita top-left">A2</span>
+          <span class="mark ok top-right">右へ</span>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">5</span>
+            <span class="target blue">A2</span>
+          </div>
+          <h2>A2で でる</h2>
+          <p class="kid">すいどうばしで おりたら、A2 の でぐちを さがします。</p>
+          <div class="check">さがすもの: A2出口 / アソボーノ表示</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene">
+          <img class="scene-photo" src="https://www.tokyo-dome.co.jp/asobono/area/img/img_index-sea_002.jpg" alt="アソボーノの屋内あそび場">
+          <span class="mark ok top-left">ASOBono!</span>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">6</span>
+            <span class="target">ASOBono!</span>
+          </div>
+          <h2>みぎへ すすむ</h2>
+          <p class="kid">A2を でたら、みぎへ すすみます。アソボーノの かんばんを さがそう。</p>
+          <div class="check">さがすもの: アソボーノ / ASOBono!</div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

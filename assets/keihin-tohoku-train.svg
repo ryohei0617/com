@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Keihin Tohoku blue train guide image">
+  <rect width="640" height="480" fill="#edf8ff"/>
+  <rect y="304" width="640" height="176" fill="#d7dbe2"/>
+  <rect x="58" y="128" width="524" height="176" rx="22" fill="#f7fbff" stroke="#8d99a8" stroke-width="8"/>
+  <rect x="78" y="168" width="484" height="28" fill="#1e9bd7"/>
+  <rect x="104" y="214" width="96" height="58" rx="8" fill="#dff3ff"/>
+  <rect x="222" y="214" width="96" height="58" rx="8" fill="#dff3ff"/>
+  <rect x="340" y="214" width="96" height="58" rx="8" fill="#dff3ff"/>
+  <rect x="458" y="214" width="72" height="58" rx="8" fill="#dff3ff"/>
+  <circle cx="168" cy="320" r="30" fill="#1d2433"/>
+  <circle cx="472" cy="320" r="30" fill="#1d2433"/>
+  <rect x="48" y="34" width="196" height="66" rx="10" fill="#1e9bd7"/>
+  <text x="146" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#fff">Platform 5</text>
+  <rect x="330" y="34" width="262" height="66" rx="10" fill="#1d2433"/>
+  <text x="461" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#fff">Next: Oimachi</text>
+</svg>

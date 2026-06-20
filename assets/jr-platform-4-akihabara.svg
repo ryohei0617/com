@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="JR Shinagawa platform 4 to Akihabara guide image">
+  <rect width="640" height="480" fill="#f6fbff"/>
+  <rect y="328" width="640" height="152" fill="#d2d7df"/>
+  <rect x="44" y="54" width="552" height="126" rx="12" fill="#1e9bd7"/>
+  <text x="112" y="137" text-anchor="middle" font-family="Arial, sans-serif" font-size="82" font-weight="700" fill="#fff">4</text>
+  <rect x="172" y="78" width="2" height="78" fill="#fff"/>
+  <text x="382" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#fff">Tokyo / Ueno</text>
+  <text x="382" y="144" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#fff">Akihabara direction</text>
+  <path d="M218 268h206" stroke="#d5142f" stroke-width="24" stroke-linecap="round"/>
+  <path d="M402 220l90 48-90 48z" fill="#d5142f"/>
+  <text x="320" y="404" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#1d2433">Do not take platform 5</text>
+</svg>

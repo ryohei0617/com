@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Suidobashi east exit guide image">
+  <rect width="640" height="480" fill="#f5fbff"/>
+  <rect y="340" width="640" height="140" fill="#d7dbe2"/>
+  <rect x="70" y="78" width="500" height="98" rx="12" fill="#1d2433"/>
+  <text x="320" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#fff">Suidobashi East Exit</text>
+  <rect x="112" y="232" width="118" height="120" rx="8" fill="#1e9bd7"/>
+  <rect x="410" y="232" width="118" height="120" rx="8" fill="#1e9bd7"/>
+  <path d="M230 292h150" stroke="#d5142f" stroke-width="24" stroke-linecap="round"/>
+  <path d="M360 244l86 48-86 48z" fill="#d5142f"/>
+  <text x="320" y="416" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1d2433">Turn left after the gate</text>
+</svg>

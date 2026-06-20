@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Shinagawa stairs guide image">
+  <rect width="640" height="480" fill="#f7f8fb"/>
+  <rect y="352" width="640" height="128" fill="#d7dbe2"/>
+  <rect x="78" y="86" width="484" height="70" rx="8" fill="#1d2433"/>
+  <text x="320" y="132" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#fff">JR transfer</text>
+  <path d="M198 352h244v-38H230v-38h180v-38H262v-38h116v-38" fill="none" stroke="#596273" stroke-width="28" stroke-linejoin="round"/>
+  <path d="M334 254V148" stroke="#d5142f" stroke-width="26" stroke-linecap="round"/>
+  <path d="M288 176l46-58 46 58z" fill="#d5142f"/>
+  <rect x="42" y="26" width="126" height="58" rx="10" fill="#d5142f"/>
+  <text x="105" y="66" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#fff">stairs</text>
+</svg>

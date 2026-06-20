@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>こどもルートカード 青物横丁から大井町</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2433;
+      --muted: #5b6577;
+      --paper: #fffdf7;
+      --line: #d9dee8;
+      --keikyu: #d5142f;
+      --jr: #1e9bd7;
+      --ok: #248b63;
+      --warn: #f0b429;
+      --soft: #f7f3e7;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, system-ui, sans-serif;
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    header {
+      display: grid;
+      gap: 18px;
+      padding: 20px 0 22px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .route-strip {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      max-width: 900px;
+    }
+
+    .station {
+      display: grid;
+      gap: 6px;
+      min-height: 88px;
+      padding: 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+    }
+
+    .station strong {
+      font-size: clamp(1.1rem, 3vw, 1.7rem);
+      line-height: 1.15;
+    }
+
+    .code {
+      display: inline-grid;
+      place-items: center;
+      min-width: 72px;
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: 0;
+    }
+
+    .kk {
+      background: var(--keikyu);
+    }
+
+    .jk {
+      background: var(--jr);
+    }
+
+    .arrow {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--muted);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .summary div {
+      min-height: 76px;
+      padding: 12px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      font-weight: 700;
+    }
+
+    .summary span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .cards {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+      gap: 18px;
+      padding: 16px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      break-inside: avoid;
+    }
+
+    .scene {
+      position: relative;
+      display: grid;
+      align-content: end;
+      aspect-ratio: 4 / 3;
+      min-height: 220px;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(#eaf7ff 0 44%, #f5f5f5 44% 72%, #d6d9de 72%);
+    }
+
+    .scene.has-photo {
+      background: #1f2630;
+    }
+
+    .scene-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .scene-photo.contain {
+      object-fit: contain;
+      background: #eef2f6;
+    }
+
+    .scene.has-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.08) 55%, rgba(0,0,0,.56));
+      pointer-events: none;
+    }
+
+    .scene::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0 32%, rgba(255,255,255,.8) 32% 36%, transparent 36% 64%, rgba(255,255,255,.8) 64% 68%, transparent 68%),
+        linear-gradient(180deg, transparent 0 67%, rgba(255,255,255,.7) 67% 69%, transparent 69%);
+      opacity: .8;
+    }
+
+    .scene.has-photo::before {
+      content: none;
+    }
+
+    .mark {
+      position: absolute;
+      z-index: 2;
+      display: inline-grid;
+      place-items: center;
+      min-height: 42px;
+      padding: 7px 12px;
+      border: 3px solid #fff;
+      border-radius: 8px;
+      background: #d5142f;
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 900;
+      line-height: 1;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .32);
+    }
+
+    .mark.blue {
+      background: var(--jr);
+    }
+
+    .mark.dark {
+      background: #1d2433;
+    }
+
+    .mark.top-left {
+      top: 12px;
+      left: 12px;
+    }
+
+    .mark.top-right {
+      top: 12px;
+      right: 12px;
+    }
+
+    .mark.mid {
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .arrow-mark {
+      position: absolute;
+      z-index: 2;
+      color: #e11d35;
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1;
+      text-shadow:
+        0 0 0 #fff,
+        2px 2px 0 #fff,
+        -2px 2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px -2px 0 #fff,
+        0 8px 18px rgba(0,0,0,.4);
+    }
+
+    .arrow-mark.up {
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+
+    .arrow-mark.right {
+      top: 45%;
+      right: 18px;
+      transform: translateY(-50%);
+    }
+
+    .arrow-mark.down {
+      top: 34%;
+      left: 52%;
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .scene.train {
+      background: linear-gradient(#edf8ff 0 46%, #cdd6df 46% 70%, #737985 70%);
+    }
+
+    .scene.concourse {
+      background: linear-gradient(#f5f8fb 0 25%, #dce6ef 25% 34%, #f7f7f3 34% 72%, #d3d5d8 72%);
+    }
+
+    .scene.exit {
+      background: linear-gradient(#f7f8fb 0 30%, #303947 30% 45%, #f8f8f5 45% 72%, #d4d6da 72%);
+    }
+
+    .photo-label {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      background: rgba(255, 255, 255, .92);
+      border-top: 2px solid var(--line);
+    }
+
+    .photo-label span {
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .num {
+      display: inline-grid;
+      place-items: center;
+      min-width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+
+    .target {
+      display: inline-grid;
+      place-items: center;
+      min-height: 46px;
+      padding: 4px 14px;
+      border: 3px solid currentColor;
+      border-radius: 8px;
+      color: var(--ok);
+      font-size: clamp(1.45rem, 5vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .target.red {
+      color: var(--keikyu);
+    }
+
+    .target.blue {
+      color: var(--jr);
+    }
+
+    .direction-sign {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border: 3px solid var(--jr);
+      border-radius: 8px;
+      background: #eef9ff;
+      color: #0d5274;
+      font-weight: 900;
+    }
+
+    .direction-sign strong {
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      line-height: 1.15;
+    }
+
+    .danger {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border: 3px solid #d73a31;
+      border-radius: 8px;
+      background: #fff1ef;
+      color: #842018;
+      font-weight: 900;
+    }
+
+    h2 {
+      margin: 10px 0 8px;
+      font-size: clamp(1.45rem, 4vw, 2.4rem);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .kid {
+      margin: 0;
+      font-size: clamp(1.45rem, 4.6vw, 2.4rem);
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .adult {
+      margin: 14px 0 0;
+      padding: 10px 12px;
+      border-left: 6px solid var(--warn);
+      background: #fff9e8;
+      color: #3f3420;
+      font-weight: 700;
+    }
+
+    .check {
+      margin-top: 10px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      padding: 14px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      color: #384154;
+      font-weight: 700;
+    }
+
+    @media (max-width: 780px) {
+      main {
+        width: min(100% - 20px, 720px);
+        padding-top: 14px;
+      }
+
+      .route-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+        width: fit-content;
+        justify-self: center;
+      }
+
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        grid-template-columns: 1fr;
+      }
+
+      .scene {
+        width: 100%;
+        min-height: 0;
+        aspect-ratio: 4 / 3;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      .card {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>のりばの すうじを さがす でんしゃルート</h1>
+      <div class="route-strip" aria-label="ルート">
+        <div class="station">
+          <span class="code kk">京急</span>
+          <strong>青物横丁</strong>
+          <span>2ばんせんへ</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="station">
+          <span class="code kk">JR</span>
+          <strong>品川</strong>
+          <span>しながわで のりかえ</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="station">
+          <span class="code jk">JR</span>
+          <strong>大井町</strong>
+          <span>おおいまち</span>
+        </div>
+      </div>
+      <section class="summary" aria-label="大人向け概要">
+        <div><span>1本目</span>京急線 青物横丁 → 品川</div>
+        <div><span>乗り換え</span>品川で階段を上り、1番線側のJR連絡改札へ</div>
+        <div><span>2本目</span>JR京浜東北線 品川 → 大井町</div>
+      </section>
+    </header>
+
+    <section class="cards" aria-label="ルートカード">
+      <article class="card">
+        <div class="scene exit has-photo">
+          <img class="scene-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Aomono-Yokocho_Station_2022_May_25_various.jpeg/500px-Aomono-Yokocho_Station_2022_May_25_various.jpeg" alt="青物横丁駅の入口">
+          <span class="mark top-left">駅入口</span>
+          <div class="photo-label">
+            <strong>写真: 青物横丁駅の入口</strong>
+            <span>駅名看板と改札が見える写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">1</span>
+            <span class="target red">2</span>
+          </div>
+          <h2>2ばんせんを さがす</h2>
+          <p class="kid">あおものよこちょうで、2 の ホームへ いきます。</p>
+          <p class="adult">大人確認: 青物横丁駅で品川方面の2番線へ。ICカードを準備して改札へ。</p>
+          <div class="check">さがすもの: 2番線 / 品川方面</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene concourse has-photo">
+          <img class="scene-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Aomono-Yokocho_Station_2022_May_25_various_16_17_55_312000.jpeg/500px-Aomono-Yokocho_Station_2022_May_25_various_16_17_55_312000.jpeg" alt="青物横丁駅のホーム">
+          <span class="mark top-right">2番線</span>
+          <div class="photo-label">
+            <strong>写真: 2番線の案内板</strong>
+            <span>「品川方面」「2番線」が読める写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">2</span>
+            <span class="target red">2</span>
+          </div>
+          <h2>2の ホームで まつ</h2>
+          <p class="kid">2 の ところで でんしゃを まちます。しながわへ いくよ。</p>
+          <p class="adult">大人確認: 京急の品川・新橋・浅草方面ホームへ。</p>
+          <div class="check">さがすもの: 2番線 / 品川方面</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene train has-photo">
+          <img class="scene-photo contain" src="assets/keikyu-train.svg" alt="京急の赤い電車の案内図">
+          <span class="mark top-left">京急</span>
+          <span class="mark top-right">品川で降りる</span>
+          <div class="photo-label">
+            <strong>写真: 京急の赤い電車</strong>
+            <span>ホームと赤い電車が入る写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">3</span>
+            <span class="target red">品川</span>
+          </div>
+          <h2>しながわで おりる</h2>
+          <p class="kid">あかい でんしゃに のって、しながわで おります。</p>
+          <p class="adult">大人確認: 品川に停車する列車に乗車。乗り過ごし注意。</p>
+          <div class="check">さがすもの: 品川 / しながわ</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene concourse has-photo">
+          <img class="scene-photo contain" src="assets/shinagawa-stairs.svg" alt="京急品川で階段を上る案内図">
+          <span class="arrow-mark up">➜</span>
+          <span class="mark top-left">上へ</span>
+          <div class="photo-label">
+            <strong>写真: 京急品川ホームの階段</strong>
+            <span>「JR線のりかえ」「階段」が見える写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">4</span>
+            <span class="target">階段</span>
+          </div>
+          <h2>かいだんを のぼる</h2>
+          <p class="kid">しながわで おりたら、JR のりかえ の かいだんを のぼります。</p>
+          <p class="adult">大人確認: 青物横丁から品川方面で到着後、JR連絡改札のある1番線側へ移動するため、階段・跨線橋の案内に従う。</p>
+          <div class="check">さがすもの: 階段 / JR線のりかえ</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene concourse has-photo">
+          <img class="scene-photo contain" src="assets/keikyu-jr-transfer-illustration.png" alt="京急からJRのりかえへの補助イラスト">
+          <span class="mark top-left">1番線側</span>
+          <span class="arrow-mark right">➜</span>
+          <div class="photo-label">
+            <strong>生成画像: 1番線側へ渡る補助図</strong>
+            <span>「1番線」「JR線のりかえ」を見つけるための図</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">5</span>
+            <span class="target red">1番線</span>
+          </div>
+          <h2>むかいの ホームへ いく</h2>
+          <p class="kid">かいだんの うえを とおって、1 の ホームがわへ いきます。</p>
+          <p class="adult">大人確認: 京急品川のJR連絡改札は横浜・羽田空港方面の1番線ホーム側。向かい側へ渡る。</p>
+          <div class="check">さがすもの: 1番線 / JR線のりかえ</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene concourse has-photo">
+          <img class="scene-photo contain" src="assets/jr-transfer-gate.svg" alt="JR線のりかえ改札の案内図">
+          <span class="mark top-left">JR</span>
+          <span class="arrow-mark right">➜</span>
+          <div class="photo-label">
+            <strong>写真: JRのりかえ改札</strong>
+            <span>「JR線のりかえ改札」が大きく見える写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">6</span>
+            <span class="target">JR</span>
+          </div>
+          <h2>JRの かいさつを とおる</h2>
+          <p class="kid">JR の マークを みつけたら、のりかえ かいさつを とおります。</p>
+          <p class="adult">大人確認: 京急の出口ではなく、JR乗り換え改札を通る。ICカードならタッチして通過。</p>
+          <div class="check">さがすもの: JR / のりかえ改札</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene concourse has-photo">
+          <img class="scene-photo contain" src="assets/jr-platform-5.svg" alt="品川駅5番線と行き先の案内図">
+          <span class="mark blue top-left">5番線</span>
+          <span class="mark blue top-right">蒲田・川崎・横浜方面</span>
+          <div class="photo-label">
+            <strong>写真: 5番線と行き先の案内板</strong>
+            <span>「5」「蒲田・川崎・横浜方面」が読める写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">7</span>
+            <span class="target blue">5番線</span>
+          </div>
+          <h2>5ばんせんと いきさきを さがす</h2>
+          <p class="kid">JRに はいったら、5 と かまた・かわさき・よこはま の かんばんを さがします。</p>
+          <div class="direction-sign">
+            <span>のる ほう</span>
+            <strong>大井町・蒲田・川崎・横浜方面</strong>
+          </div>
+          <div class="danger">東京・上野方面には のりません。</div>
+          <p class="adult">大人確認: 品川駅では京浜東北線の南行、大井町・蒲田・川崎・横浜・大船方面へ。番線や行き先表示は当日現地で確認。</p>
+          <div class="check">さがすもの: 5番線 / 蒲田・川崎・横浜方面</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene train has-photo">
+          <img class="scene-photo contain" src="assets/keihin-tohoku-train.svg" alt="京浜東北線の電車の案内図">
+          <span class="mark blue top-left">5番線</span>
+          <span class="mark blue top-right">大井町へ</span>
+          <div class="photo-label">
+            <strong>写真: 品川駅 5番線ホーム</strong>
+            <span>「蒲田・川崎・横浜方面」が見える写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">8</span>
+            <span class="target blue">5番線</span>
+          </div>
+          <h2>5の ホームで のる</h2>
+          <p class="kid">5 の ところで、かまた・かわさき・よこはま ほうめんの でんしゃに のります。</p>
+          <div class="direction-sign">
+            <span>つぎに おりる えき</span>
+            <strong>大井町</strong>
+          </div>
+          <p class="adult">大人確認: 京浜東北線の蒲田・横浜・大船方面に乗る。</p>
+          <div class="check">さがすもの: 5番線 / 蒲田・川崎・横浜方面 / 次は大井町</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene train has-photo">
+          <img class="scene-photo contain" src="assets/oimachi-arrival.svg" alt="大井町で降りる案内図">
+          <span class="mark blue mid">大井町</span>
+          <div class="photo-label">
+            <strong>写真: 大井町駅の駅名標</strong>
+            <span>「大井町」が読める写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">9</span>
+            <span class="target blue">大井町</span>
+          </div>
+          <h2>おおいまちで おりる</h2>
+          <p class="kid">おおいまち が みえたら、おります。とうちゃく！</p>
+          <p class="adult">大人確認: 品川の次が大井町。降車後は目的地に合わせて出口へ。</p>
+          <div class="check">さがすもの: 大井町 / おおいまち</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="scene exit has-photo">
+          <img class="scene-photo contain" src="assets/oimachi-exit.svg" alt="大井町駅の出口へ進む案内図">
+          <span class="mark top-left">出口</span>
+          <div class="photo-label">
+            <strong>写真: 大井町駅の改札・出口</strong>
+            <span>中央口、東口、西口の案内が見える写真</span>
+          </div>
+        </div>
+        <div>
+          <div class="badge-row">
+            <span class="num">10</span>
+            <span class="target">出口</span>
+          </div>
+          <h2>おとなと でぐちへ</h2>
+          <p class="kid">かいさつを でたら、おとなの ひとと いっしょに すすみます。</p>
+          <p class="adult">大人確認: 目的地に合わせて中央口・東口・西口を選ぶ。</p>
+          <div class="check">さがすもの: 改札 / 出口</div>
+        </div>
+      </article>
+    </section>
+
+    <p class="footer-note">
+      当日確認ポイント: 工事、番線変更、運休、混雑時の誘導で表示が変わることがあります。
+      このカードは「のりば番号を探す練習用の下書き」として使い、現地写真に差し替えると実用度が上がります。
+    </p>
+  </main>
+</body>
+</html>

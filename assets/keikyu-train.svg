@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Keikyu red train guide image">
+  <rect width="640" height="480" fill="#eaf7ff"/>
+  <rect y="292" width="640" height="188" fill="#d5d9df"/>
+  <rect x="52" y="128" width="536" height="178" rx="24" fill="#d5142f"/>
+  <rect x="82" y="154" width="106" height="72" rx="8" fill="#f6fbff"/>
+  <rect x="208" y="154" width="106" height="72" rx="8" fill="#f6fbff"/>
+  <rect x="334" y="154" width="106" height="72" rx="8" fill="#f6fbff"/>
+  <rect x="460" y="154" width="86" height="72" rx="8" fill="#f6fbff"/>
+  <rect x="78" y="246" width="484" height="22" fill="#ffffff"/>
+  <circle cx="160" cy="318" r="34" fill="#1d2433"/>
+  <circle cx="480" cy="318" r="34" fill="#1d2433"/>
+  <rect x="36" y="28" width="220" height="74" rx="12" fill="#1d2433"/>
+  <text x="146" y="77" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#fff">Keikyu</text>
+  <path d="M460 70h92" stroke="#d5142f" stroke-width="22" stroke-linecap="round"/>
+  <path d="M536 40l64 30-64 30z" fill="#d5142f"/>
+</svg>
